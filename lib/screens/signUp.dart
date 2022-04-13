@@ -126,32 +126,24 @@ class _SignUpPageState extends State<SignUpPage> {
                               )
                             : Text("Sign Up"),
                         onPressed: () {
-                          SignUpUser data = SignUpUser(
-                              email: controllerEmail.text,
-                              phone: controllerPhone.text,
-                              username: controllerUsername.text,
-                              password: controllerPassword.text,
-                              progress:  "{"+'"' +"NEXTSTEP"+'"'+":"+" "+'"'+"PROFILE_UPDATE"+'"' +"}" );
-
                           if (_formkey.currentState!.validate()) {
                             setState(() {
                               isLoading = true;
                             });
                             ApiServices api = ApiServices();
-                            api.createUser(data).then((value) => {
-                                  if (value)
-                                    {
-                                      setState(() {
-                                        isLoading = false;
-                                      }),
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => LoginPage()),
-                                      )
-                                    }
-                                  else
-                                    {debugPrint('value: false.')}
+                            api.createUser(
+                              email: controllerEmail.text,
+                              phone: controllerPhone.text,
+                              username: controllerUsername,
+                              password: controllerPassword.text,
+                            ).then((value) => {
+                                  setState(() {
+                                    isLoading = false;
+                                  }),
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => LoginPage()))
                                 });
                           }
                         },

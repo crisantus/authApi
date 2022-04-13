@@ -2,34 +2,32 @@ import 'dart:convert';
 
 class LoginUser {
   late String email;
-  
-  late String password;
-  
 
-  LoginUser(
-      {required this.email,
-     
-      required this.password,
-      });
+  late String password;
+
+  LoginUser({
+    required this.email,
+    required this.password,
+  });
 
   factory LoginUser.fromJson(Map<String, dynamic> json) {
     return LoginUser(
       email: json['email'],
-      
       password: json['password'],
-     
     );
   }
 
-    Map<String, dynamic> toJson() {
-    return {"email": email, "password": password,};
+  Map<String, dynamic> toJson() {
+    return {
+      "email": email,
+      "password": password,
+    };
   }
 
   @override
   String toString() {
     return 'SignUpUser{"email": $email, "password": $password}';
   }
-
 }
 
 List<LoginUser> loginFromJson(String jsonData) {
@@ -39,6 +37,5 @@ List<LoginUser> loginFromJson(String jsonData) {
 
 String loginToJson(LoginUser data) {
   final jsonData = data.toJson();
-  return json.encode(jsonData);
+  return json.encode(<String, dynamic>{"LoginData": jsonData});
 }
-
